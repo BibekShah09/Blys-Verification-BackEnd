@@ -1,0 +1,42 @@
+tags:
+- name: codes
+  description: codes API
+
+paths:
+# [POST] codes
+  /api/v1/code-verification:
+    post:
+      tags:
+      - codes
+      summary: Verify Code
+      parameters:
+        - name: body
+          in: body
+          description: code verification data
+          required: true
+          schema:
+            $ref: '#/definitions/codes'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  codes:
+    type: object
+    required:
+        - code
+    properties:
+      code:
+        type: integer
+        description: Code
+
+schemes:
+ - https
+ - http

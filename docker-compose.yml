@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  validator:
+    container_name: validator
+    image: node:12
+    volumes:
+      - ./:/app/
+      - ./.env.docker:/app/.env
+    ports:
+      - '8848:8848'
+    entrypoint: /bin/sh
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8848']
+      interval: 1m
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    command: -c "sleep 5 && cd /app/ && yarn install && yarn start"
